@@ -110,21 +110,24 @@ void selectionSort(int* pData, int n)
     }
 }
 
-// parses input file to an integer array
 int parseData(char *inputFileName, int **ppData)
 {
-	FILE* inFile = fopen(inputFileName,"r");
-	int dataSz = 0;
-	*ppData = NULL;
-	
-	if (inFile)
-	{
-		fscanf(inFile,"%d\n",&dataSz);
-		*ppData = (int *)malloc(sizeof(int) * dataSz);
-		// Implement parse data block
-	}
-	
-	return dataSz;
+    FILE* inFile = fopen(inputFileName, "r");
+    int dataSz = 0;
+    *ppData = NULL;
+    
+    if (inFile)
+    {
+        fscanf(inFile, "%d\n", &dataSz);
+        *ppData = (int*)malloc(sizeof(int) * dataSz);
+        for (int i = 0; i < dataSz; i++)
+        {
+            fscanf(inFile, "%d", &(*ppData)[i]);
+        }
+        fclose(inFile);
+    }
+    
+    return dataSz;
 }
 
 // prints first and last 100 items in the data array
